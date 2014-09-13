@@ -26,6 +26,7 @@ Source0:       http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
 # https://github.com/nicolasff/phpredis/issues/332 - missing tests
 Source1:       https://github.com/nicolasff/phpredis/archive/%{version}.tar.gz
 
+BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: %{basepkg}-devel
 BuildRequires: %{basepkg}-pecl-igbinary-devel
 # to run Test suite
