@@ -10,12 +10,13 @@
 %{!?__pecl:      %global __pecl      %{_bindir}/pecl}
 %{!?__php:       %global __php       %{_bindir}/php}
 
+%global basepkg   php54w
 %global pecl_name   redis
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
 
 Summary:       Extension for communicating with the Redis key-value store
-Name:          php-pecl-redis
+Name:          %{basepkg}-pecl-redis
 Version:       2.2.5
 Release:       1%{?dist}
 License:       PHP
@@ -25,8 +26,8 @@ Source0:       http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
 # https://github.com/nicolasff/phpredis/issues/332 - missing tests
 Source1:       https://github.com/nicolasff/phpredis/archive/%{version}.tar.gz
 
-BuildRequires: php-devel
-BuildRequires: php-pecl-igbinary-devel
+BuildRequires: %{basepkg}-devel
+BuildRequires: %{basepkg}-pecl-igbinary-devel
 # to run Test suite
 %if %{with_tests}
 BuildRequires: redis >= 2.6
@@ -36,11 +37,12 @@ Requires:      php(zend-abi) = %{php_zend_api}
 Requires:      php(api) = %{php_core_api}
 # php-pecl-igbinary missing php-pecl(igbinary)%{?_isa}
 Requires:      php-pecl-igbinary%{?_isa}
-Obsoletes:     php-redis < %{version}
 Provides:      php-redis = %{version}-%{release}
 Provides:      php-redis%{?_isa} = %{version}-%{release}
 Provides:      php-pecl(%{pecl_name}) = %{version}
 Provides:      php-pecl(%{pecl_name})%{?_isa} = %{version}
+Provides:      php-pecl-%{pecl_name} = %{version}-%{release}
+Provides:      php-pecl-%{pecl_name}%{?_isa} = %{version}-%{release}
 
 %if 0%{?fedora} < 20 && 0%{?rhel} < 7
 # Filter private shared object
@@ -218,39 +220,5 @@ fi
 
 
 %changelog
-* Wed Mar 19 2014 Remi Collet <remi@fedoraproject.org> - 2.2.5-1
-- Update to 2.2.5
-
-* Thu Mar 13 2014 Remi Collet <remi@fedoraproject.org> - 2.2.4-2
-- cleanups
-- move doc in pecl_docdir
-- run upstream tests only with --with tests option
-
-* Mon Sep 09 2013 Remi Collet <remi@fedoraproject.org> - 2.2.4-1
-- Update to 2.2.4
-
-* Tue Apr 30 2013 Remi Collet <remi@fedoraproject.org> - 2.2.3-1
-- update to 2.2.3
-- upstream moved to pecl, rename from php-redis to php-pecl-redis
-
-* Tue Sep 11 2012 Remi Collet <remi@fedoraproject.org> - 2.2.2-5.git6f7087f
-- more docs and improved description
-
-* Sun Sep  2 2012 Remi Collet <remi@fedoraproject.org> - 2.2.2-4.git6f7087f
-- latest snahot (without bundled igbinary)
-- remove chmod (done upstream)
-
-* Sat Sep  1 2012 Remi Collet <remi@fedoraproject.org> - 2.2.2-3.git5df5153
-- run only test suite with redis > 2.4
-
-* Fri Aug 31 2012 Remi Collet <remi@fedoraproject.org> - 2.2.2-2.git5df5153
-- latest master
-- run test suite
-
-* Wed Aug 29 2012 Remi Collet <remi@fedoraproject.org> - 2.2.2-1
-- update to 2.2.2
-- enable ZTS build
-
-* Tue Aug 28 2012 Remi Collet <remi@fedoraproject.org> - 2.2.1-1
-- initial package
-
+* Sat Sep 13 2014 Andy Thompson <andy@webtatic.com> - 2.2.5-1
+- Import EPEL7 php-pecl-redis-2.2.5-1 RPM
