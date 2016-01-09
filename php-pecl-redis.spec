@@ -10,7 +10,7 @@
 %{!?__pecl:      %global __pecl      %{_bindir}/pecl}
 %{!?__php:       %global __php       %{_bindir}/php}
 
-%global basepkg   php54w
+%global basepkg     %{?basepkg}%{!?basepkg:php}
 %global pecl_name   redis
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
