@@ -1,4 +1,4 @@
-name: php-pecl-redis
+name: php5-pecl-redis
 profiles:
   php54w:
     define:
@@ -9,9 +9,6 @@ profiles:
   php56w:
     define:
       basepkg: php56w
-  php70w:
-    define:
-      basepkg: php70w
 builds:
   webtatic-el7:
     target: el7-development
@@ -20,7 +17,6 @@ builds:
       - php54w
       - php55w
       - php56w
-      - php70w
   webtatic-el6:
     target: el6-development
     arch: [x86_64, i386]
@@ -28,7 +24,6 @@ builds:
       - php54w
       - php55w
       - php56w
-      - php70w
   webtatic-el5:
     target: el5-development
     arch: [x86_64, i386]
