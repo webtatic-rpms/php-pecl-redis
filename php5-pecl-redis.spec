@@ -15,6 +15,8 @@
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
 
+%global with_igbinary 1
+
 Summary:       Extension for communicating with the Redis key-value store
 Name:          %{basepkg}-pecl-redis
 Version:       2.2.8
@@ -28,7 +30,9 @@ Source1:       https://github.com/nicolasff/phpredis/archive/%{version}.tar.gz
 
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: %{basepkg}-devel
+%if 0%{?with_igbinary}
 BuildRequires: %{basepkg}-pecl-igbinary-devel
+%endif
 # to run Test suite
 %if %{with_tests}
 BuildRequires: redis >= 2.6
@@ -36,8 +40,10 @@ BuildRequires: redis >= 2.6
 
 Requires:      php(zend-abi) = %{php_zend_api}
 Requires:      php(api) = %{php_core_api}
+%if 0%{?with_igbinary}
 # php-pecl-igbinary missing php-pecl(igbinary)%{?_isa}
 Requires:      php-pecl-igbinary%{?_isa}
+%endif
 Provides:      php-redis = %{version}-%{release}
 Provides:      php-redis%{?_isa} = %{version}-%{release}
 Provides:      php-pecl(%{pecl_name}) = %{version}
@@ -99,7 +105,9 @@ cd nts
 %configure \
     --enable-redis \
     --enable-redis-session \
+%if 0%{?with_igbinary}
     --enable-redis-igbinary \
+%endif
     --with-php-config=%{_bindir}/php-config
 make %{?_smp_mflags}
 
@@ -109,7 +117,9 @@ cd ../zts
 %configure \
     --enable-redis \
     --enable-redis-session \
+%if 0%{?with_igbinary}
     --enable-redis-igbinary \
+%endif
     --with-php-config=%{_bindir}/zts-php-config
 make %{?_smp_mflags}
 %endif
@@ -139,13 +149,17 @@ done
 %check
 # simple module load test
 %{__php} --no-php-ini \
+%if 0%{?with_igbinary}
     --define extension=igbinary.so \
+%endif
     --define extension=%{buildroot}%{php_extdir}/%{pecl_name}.so \
     --modules | grep %{pecl_name}
 
 %if %{with_zts}
 %{__ztsphp} --no-php-ini \
+%if 0%{?with_igbinary}
     --define extension=igbinary.so \
+%endif
     --define extension=%{buildroot}%{php_ztsextdir}/%{pecl_name}.so \
     --modules | grep %{pecl_name}
 %endif
@@ -181,7 +195,9 @@ sed -e "s/6379/$port/" -i TestRedis.php
 # Run the test Suite
 ret=0
 %{__php} --no-php-ini \
+%if 0%{?with_igbinary}
     --define extension=igbinary.so \
+%endif
     --define extension=%{buildroot}%{php_extdir}/%{pecl_name}.so \
     TestRedis.php || ret=1
 
