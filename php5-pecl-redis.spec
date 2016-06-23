@@ -25,8 +25,6 @@ License:       PHP
 Group:         Development/Languages
 URL:           http://pecl.php.net/package/redis
 Source0:       http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
-# https://github.com/nicolasff/phpredis/issues/332 - missing tests
-Source1:       https://github.com/nicolasff/phpredis/archive/%{version}.tar.gz
 
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: %{basepkg}-devel
@@ -68,12 +66,10 @@ some doesn't work with an old redis server version.
 
 
 %prep
-%setup -q -c -a 1
+%setup -q -c
 
 # rename source folder
 mv %{pecl_name}-%{version} nts
-# tests folder from github archive
-mv phpredis-%{version}/tests nts/tests
 
 # Sanity check, really often broken
 extver=$(sed -n '/#define PHP_REDIS_VERSION/{s/.* "//;s/".*$//;p}' nts/php_redis.h)
@@ -239,6 +235,7 @@ fi
 %changelog
 * Tue Jun 21 2016 Andy Thompson <andy@webtatic.com> - 2.2.8-1
 - Update to 2.2.8
+- Remove SOURCE1 now upstream pecl package has tests
 
 * Wed Apr 08 2015 Andy Thompson <andy@webtatic.com> - 2.2.7-1
 - Update to 2.2.7
