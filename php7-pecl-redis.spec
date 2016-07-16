@@ -27,7 +27,7 @@ URL:           http://pecl.php.net/package/redis
 Source0:       http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
 
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: %{basepkg}-devel
+BuildRequires: %{basepkg}-devel, %{basepkg}-pear
 %if 0%{?with_igbinary}
 BuildRequires: %{basepkg}-pecl-igbinary-devel
 %endif
@@ -237,6 +237,7 @@ fi
 - Update to 3.0.0
 - Remove SOURCE1 now upstream pecl package has tests
 - Disable igbinary support until upstream ready for PHP 7
+- Force build with pear installed
 
 * Wed Apr 08 2015 Andy Thompson <andy@webtatic.com> - 2.2.7-1
 - Update to 2.2.7
