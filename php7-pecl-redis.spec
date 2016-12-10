@@ -15,12 +15,12 @@
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
 
-%global with_igbinary 0
+%global with_igbinary 1
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          %{basepkg}-pecl-redis
 Version:       3.0.0
-Release:       2%{?dist}
+Release:       3%{?dist}
 License:       PHP
 Group:         Development/Languages
 URL:           http://pecl.php.net/package/redis
@@ -233,6 +233,9 @@ fi
 
 
 %changelog
+* Sat Dec 10 2016 Andy Thompson <andy@webtatic.com> - 3.0.0-3
+- Enable igbinary support now it supports PHP 7
+
 * Fri Oct 07 2016 Andy Thompson <andy@webtatic.com> - 3.0.0-2
 - Rebuild for php(API) update
 
