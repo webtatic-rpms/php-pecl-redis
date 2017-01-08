@@ -19,8 +19,8 @@
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          %{basepkg}-pecl-redis
-Version:       3.0.0
-Release:       3%{?dist}
+Version:       3.1.0
+Release:       1%{?dist}
 License:       PHP
 Group:         Development/Languages
 URL:           http://pecl.php.net/package/redis
@@ -233,6 +233,9 @@ fi
 
 
 %changelog
+* Sun Jan 08 2017 Andy Thompson <andy@webtbatic.com> - 3.1.0-1
+- Update to 3.1.0
+
 * Sat Dec 10 2016 Andy Thompson <andy@webtatic.com> - 3.0.0-3
 - Enable igbinary support now it supports PHP 7
 
