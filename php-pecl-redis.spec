@@ -19,7 +19,7 @@
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          %{basepkg}-pecl-redis
-Version:       3.1.4
+Version:       3.1.6
 Release:       1%{?dist}
 License:       PHP
 Group:         Development/Languages
@@ -233,6 +233,9 @@ fi
 
 
 %changelog
+* Sun Feb 04 2018 Andy Thompson <andy@webtbatic.com> - 3.1.6-1
+- Update to 3.1.6
+
 * Thu Oct 19 2017 Andy Thompson <andy@webtbatic.com> - 3.1.4-1
 - Update to 3.1.4
 
